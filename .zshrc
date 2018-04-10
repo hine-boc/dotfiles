@@ -59,6 +59,12 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
+#######
+# カレントディレクトリのある文字列を含むファイルを指定したディレクトリへ移動
+function search_mv_here (){ find ./ -type f -maxdepth 1 -iname "*$1*" -exec mv {} $2/ \; }
+
+# ある文字列を含むファイルを指定したディレクトリへ移動(再帰的)
+function search_mv_rec (){ find ./ -type f -maxdepth 1 -iname "*$1*" -exec mv {} $2/ \; }
 
 ########################################
 # vcs_info
@@ -199,6 +205,7 @@ esac
 
 # vim:set ft=zsh:
 export PATH="/usr/local/bin:$PATH"
+
 
 
 # <Tab> でパス名の補完候補を表示したあと、
